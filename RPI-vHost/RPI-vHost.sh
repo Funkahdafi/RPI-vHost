@@ -22,9 +22,9 @@ html_dir=/var/www/html										#Apache2 DocumentRoot, innerhalb dessen wird vho
 
 index_file=index.html										#Index z.B.: *.htm, *.html, *.php, *.php5
 
-server_admin_mail=pi@rapsbirne									#E-Mail des Serveradmin
+server_admin_mail=mail@example.com								#E-Mail des Serveradmin
 
-domain=groo.home-webserver.de									#Auf welcher Domain soll der vhost laufen ?
+domain=localhost										#Auf welcher Domain soll der vhost laufen ?
 
 #ENDE KONFIGURATION
 
@@ -98,9 +98,9 @@ function vhost_hinzufuegen(){									#Funktion vhost_hinzufügen ANFANG
 }												#Funktion vhost_hinzufügen ENDE
 
 function vhost_eintragen(){									#Funtion vhost_eintragen ANFANG
-echo "Bitte geben Sie einen neuen Hostnamen an:";
-read hostname
-vhostname=$(echo $hostname | tr '[A-Z]' '[a-z]');						#Eingabe to lower konvertieren
+	echo "Bitte geben Sie einen neuen Hostnamen an:";
+	read hostname
+	vhostname=$(echo $hostname | tr '[A-Z]' '[a-z]');					#Eingabe to lower konvertieren
 
 if [[ ! -e $apache_dir/sites-available/$vhostname.conf && ! -d $html_dir/$vhostname ]];		#Prüfung ob *.conf und directory vorhanden
 then
