@@ -4,8 +4,8 @@
 #											#
 # Programm ausführen:									#
 # -------------------									#
-# sudo chmod +x ./RPI-vHost.sh								#
-# sudo ./RPI-vHost.sh									#
+# root: chmod +x ./RPI-vHost.sh								#
+# root: ./RPI-vHost.sh									#
 #											#
 # Zusätzliche Informationen:								#
 # --------------------------								#
@@ -31,7 +31,7 @@ index_file=index.html										#Index-Datei: .htm, .html, .php, .php5
 
 server_admin_mail=mail@example.com								#E-Mail Serveradmin
 
-domain=groo.home-webserver.de									#Auf welcher Domain soll der vHost laufen ?
+domain=localhost										#Auf welcher Domain soll der vHost laufen ?
 
 #ENDE KONFIGURATION
 
