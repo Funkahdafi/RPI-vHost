@@ -31,7 +31,7 @@ index_file=index.html										#Index-Datei: .htm, .html, .php, .php5
 
 server_admin_mail=mail@example.com								#E-Mail Serveradmin
 
-domain=localhost										#Auf welcher Domain soll der vHost laufen ?
+domain=groo.home-webserver.de									#Auf welcher Domain soll der vHost laufen ?
 
 #ENDE KONFIGURATION
 
@@ -57,7 +57,7 @@ else
 
 if [ ! -d $apache_dir/logs ];									#Check: Apache2 log
 then
-	sudo mkdir $apache_dir/logs;
+	mkdir $apache_dir/logs;
 else
 
 function vhost_hinzufuegen(){									#vhost_hinzufügen ANFANG
@@ -66,20 +66,20 @@ function vhost_hinzufuegen(){									#vhost_hinzufügen ANFANG
         echo "Dieser Vorgang kann einige Sekunden in Anspruch nehmen.";
 	echo "";
         sleep 1
-        sudo mkdir $html_dir/$vhostname;
+        mkdir $html_dir/$vhostname;
         echo -e "[ \033[32mok\033[0m ] $html_dir/$vhostname wurde angelegt.";
         sleep 1
-        sudo chmod 755 $html_dir/$vhostname;
-        sudo chown www-data:www-data $html_dir/$vhostname;
+        chmod 755 $html_dir/$vhostname;
+        chown www-data:www-data $html_dir/$vhostname;
         echo -e "[ \033[32mok\033[0m ] Schreibrecht für $html_dir/$vhostname gesetzt.";
         sleep 1
-        sudo touch $html_dir/$vhostname/$index_file;
+        touch $html_dir/$vhostname/$index_file;
         echo -e "[ \033[32mok\033[0m ] $index_file wurde angelegt.";
         sleep 1
-        sudo chmod 644 $html_dir/$vhostname/$index_file;
-        sudo chown www-data:www-data $html_dir/$vhostname/$index_file;
+        chmod 644 $html_dir/$vhostname/$index_file;
+        chown www-data:www-data $html_dir/$vhostname/$index_file;
         sleep 1
-        sudo touch $apache_dir/sites-available/$vhostname.conf;
+        touch $apache_dir/sites-available/$vhostname.conf;
         sleep 1
         echo "<VirtualHost  *:80>" >> $apache_dir/sites-available/$vhostname.conf;
         echo "  ServerAdmin $server_admin_mail" >> $apache_dir/sites-available/$vhostname.conf;
@@ -91,13 +91,13 @@ function vhost_hinzufuegen(){									#vhost_hinzufügen ANFANG
         sleep 1
         echo -e "[ \033[32mok\033[0m ] $vhostname.conf wurde erfolgreich angelegt und wird aktiviert.";
         sleep 1
-        sudo a2ensite $vhostname.conf > /dev/null;
+        a2ensite $vhostname.conf > /dev/null;
         sleep 1
 	echo"";
         echo "Apache2 wird neugestartet.";
 	echo "";
         sleep 1
-        sudo /etc/init.d/apache2 reload > /dev/null;
+        /etc/init.d/apache2 reload > /dev/null;
         sleep 3
 	echo "<br>" >> $html_dir/$vhostname/$index_file;
         echo "<center><h2>Ihr vHost: $vhostname wurde erfolgreich in $html_dir angelegt.</h2></center>" >> $html_dir/$vhostname/$index_file;
@@ -107,7 +107,29 @@ function vhost_hinzufuegen(){									#vhost_hinzufügen ANFANG
 	echo "";
         echo "Vielen Dank, wir sind fertig :-))";
 	echo "";
+	echo "Weiteren vHost hinzufügen  j/n?";
+	echo "";
+	read -p "Eingabe: " antwort
+	if [ $antwort = "j" ];
+then
+	echo "";
+	vhost_eintragen
+else
+	if [ $antwort = "n" ];
+then
+        echo "";
+        echo "Auf Wiedersehen !";
+        echo "";
+        sleep 2
+        clear;
 	exit
+else
+  	echo "";
+        echo "Ungültige Auswahl. Bitte probieren Sie es erneut.";
+        echo "";
+        vhost_eintragen
+fi
+fi
 }												#vhost_hinzufügen ENDE
 
 function vhost_eintragen(){									#vhost_eintragen ANFANG
@@ -133,10 +155,12 @@ then
 	vhost_eintragen
 else
 	if [ $antwort = "n" ];
-	then
+then
 	echo "";
 	echo "Auf Wiedersehen !";
 	echo "";
+	sleep 2
+	clear;
 	exit
 else
 	echo "";
@@ -147,8 +171,8 @@ fi
 fi
 fi
 
-}												#vhost_eintragen ENDE
-
+}
+												#vhost_eintragen ENDE
 	vhost_eintragen
 
 fi
