@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 
 #########################################################################################
 #											#
@@ -60,21 +60,6 @@ then
 	mkdir $apache_dir/logs;
 else
 
-function programm_beenden(){
-	echo "";
-        echo "Auf Wiedersehen !";
-        echo "";
-        sleep 2
-        clear;
-	exit
-}
-
-function ungueltige_auswahl(){
-	echo "";
-	echo "Ungültige Auswahl. Bitte probieren Sie es erneut.";
-	echo "";
-}
-
 function vhost_hinzufuegen(){									#vhost_hinzufügen ANFANG
         echo "";
 	echo "Die Installation von vHost $vhostname beginnt.";
@@ -108,15 +93,15 @@ function vhost_hinzufuegen(){									#vhost_hinzufügen ANFANG
         sleep 1
         a2ensite $vhostname.conf > /dev/null;
         sleep 1
-		echo "";
+	echo"";
         echo "Apache2 wird neugestartet.";
-		echo "";
+	echo "";
         sleep 1
         /etc/init.d/apache2 reload > /dev/null;
         sleep 3
-		echo "<br>" >> $html_dir/$vhostname/$index_file;
+	echo "<br>" >> $html_dir/$vhostname/$index_file;
         echo "<center><h2>Ihr vHost: $vhostname wurde erfolgreich in $html_dir angelegt.</h2></center>" >> $html_dir/$vhostname/$index_file;
-		echo "<br><br>" >> $html_dir/$vhostname/$index_file;
+	echo "<br><br>" >> $html_dir/$vhostname/$index_file;
 	echo "<center><a href=https://github.com/Funkahdafi/RPI-vHost target=_blank>RPI-vHost@GitHub</a></center>" >> $html_dir/$vhostname/$index_file;
 	echo -e "[ \033[32mok\033[0m ] Ihr  vHost ist unter \033[32mhttp://$vhostname.$domain\033[0m erreichbar.";
 	echo "";
@@ -132,9 +117,16 @@ then
 else
 	if [ $antwort = "n" ];
 then
-	programm_beenden
+        echo "";
+        echo "Auf Wiedersehen !";
+        echo "";
+        sleep 2
+        clear;
+	exit
 else
-		ungueltige_auswahl
+  	echo "";
+        echo "Ungültige Auswahl. Bitte probieren Sie es erneut.";
+        echo "";
         vhost_eintragen
 fi
 fi
@@ -164,9 +156,16 @@ then
 else
 	if [ $antwort = "n" ];
 then
-	programm_beenden
+	echo "";
+	echo "Auf Wiedersehen !";
+	echo "";
+	sleep 2
+	clear;
+	exit
 else
-	ungueltige_auswahl
+	echo "";
+	echo "Ungültige Auswahl. Bitte probieren Sie es erneut.";
+	echo "";
 	vhost_eintragen
 fi
 fi
