@@ -2,8 +2,8 @@
 
 Vielen Dank für's reinschauen und ausprobieren von RPI-vHost.
 
-#su
+#Als Root
 chmod +x RPI-vHost.sh && ./RPI-vHost.sh
 
-#sudo
+#sudo (Rasbian
 sudo chmod +x RPI-vHost.sh && sudo ./RPI-vHost.sh
