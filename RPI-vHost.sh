@@ -135,6 +135,15 @@ fi
 function vhost_eintragen(){									#vhost_eintragen ANFANG
 	echo "Bitte geben Sie einen Hostnamen an.";
 	read -p "Eingabe: " hostname
+
+if [[ -z $hostname ]];
+then
+	echo "";
+	echo "Sie haben keinen Hostnamen eingegeben.";
+	echo "Bitte versuchen Sie es erneut.";
+	echo "";
+	vhost_eintragen
+else
 	vhostname=$(echo $hostname | tr '[A-Z]' '[a-z]');					#Eingabe to lower
 
 if [[ ! -e $apache_dir/sites-available/$vhostname.conf && ! -d $html_dir/$vhostname ]];		#Check: *.conf & dir
@@ -167,6 +176,7 @@ else
 	echo "Ungültige Auswahl. Bitte probieren Sie es erneut.";
 	echo "";
 	vhost_eintragen
+fi
 fi
 fi
 fi
