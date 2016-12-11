@@ -93,7 +93,7 @@ function vhost_hinzufuegen(){									#vhost_hinzufügen ANFANG
         sleep 1
         a2ensite $vhostname.conf > /dev/null;
         sleep 1
-	echo"";
+	echo "";
         echo "Apache2 wird neugestartet.";
 	echo "";
         sleep 1
@@ -110,12 +110,12 @@ function vhost_hinzufuegen(){									#vhost_hinzufügen ANFANG
 	echo "Weiteren vHost hinzufügen  j/n?";
 	echo "";
 	read -p "Eingabe: " antwort
-	if [ $antwort = "j" ];
+	if [[ $antwort = "j" && ! -z $antwort ]];
 then
 	echo "";
 	vhost_eintragen
 else
-	if [ $antwort = "n" ];
+	if [[ $antwort = "n" && ! -z $antwort ]];
 then
         echo "";
         echo "Auf Wiedersehen !";
@@ -150,11 +150,11 @@ else
 	echo "";
 	echo "Wollen Sie einen neuen Hostnamen wählen? j/n";
 	read -p "Eingabe: " antwort
-	if [ $antwort = "j" ];
+	if [[ $antwort = "j" && ! -z $antwort ]];
 then
 	vhost_eintragen
 else
-	if [ $antwort = "n" ];
+	if [[ $antwort = "n" && ! -z $antwort ]];
 then
 	echo "";
 	echo "Auf Wiedersehen !";
