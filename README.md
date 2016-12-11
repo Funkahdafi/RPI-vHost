@@ -2,5 +2,5 @@
 
 Vielen Dank für's reinschauen und ausprobieren von RPI-vHost.
 
-<b>sudo chmod +x RPI-vHost.sh</b><br>
-<b>sudo ./RPI-vHost.sh</b>
+root: <b>chmod +x RPI-vHost.sh</b><br>
+root: <b>./RPI-vHost.sh</b>
