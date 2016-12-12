@@ -145,7 +145,7 @@ then
 	echo "";
 	vhost_eintragen
 else
-	vhostname=$(echo $hostname | tr '[A-Z]' '[a-z]');					#Eingabe to lower
+	vhostname=$(echo $hostname | tr '[A-Z]' '[a-z]' | echo $hostname | tr -d " ");					#Eingabe to lower
 
 if [[ ! -e $apache_dir/sites-available/$vhostname.conf && ! -d $html_dir/$vhostname ]];		#Check: *.conf & dir
 then
@@ -156,7 +156,7 @@ then
 else
 	echo "";
 	echo -e "Achtung: \e[41mvHostname $vhostname kann nicht vergeben werden.\e[49m";
-	echo "Grund: Es gibt diesen vHost schon oder ein gleichnamiges HTML-Verzeichnis.";
+	echo "Grund: Es gibt diesen vHost schon, oder ein gleichnamiges HTML-Verzeichnis.";
 	echo "";
 	echo "Wollen Sie einen neuen Hostnamen wählen? j/n";
 	read -p "Eingabe: " antwort
