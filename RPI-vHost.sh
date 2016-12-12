@@ -100,7 +100,8 @@ function vhost_hinzufuegen(){									#vhost_hinzufügen ANFANG
         /etc/init.d/apache2 reload > /dev/null;
         sleep 3
 	echo "<br>" >> $html_dir/$vhostname/$index_file;
-        echo "<center><h2>Ihr vHost: $vhostname wurde erfolgreich in $html_dir angelegt.</h2></center>" >> $html_dir/$vhostname/$index_file;
+        echo "<center><h2>Ihr vHost: <font color=green>$vhostname</font> wurde erfolgreich in $html_dir angelegt.</h2></center><br>" >> $html_dir/$vhostname/$index_file;
+	echo "<center><h3>http://$vhostname.$domain</center></h3>"; >> $html_dir/$vhostname/$index_file;
 	echo "<br><br>" >> $html_dir/$vhostname/$index_file;
 	echo "<center><a href=https://github.com/Funkahdafi/RPI-vHost target=_blank>RPI-vHost@GitHub</a></center>" >> $html_dir/$vhostname/$index_file;
 	echo -e "[ \033[32mok\033[0m ] Ihr  vHost ist unter \033[32mhttp://$vhostname.$domain\033[0m erreichbar.";
