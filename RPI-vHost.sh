@@ -31,7 +31,7 @@ index_file=index.html										#Index-Datei: .htm, .html, .php, .php5
 
 serveradmin_mail=mail@example.com								#E-Mail Serveradmin
 
-domain=localhost										#Auf welcher Domain soll der vHost laufen ?
+domain=groo.home-webserver.de										#Auf welcher Domain soll der vHost laufen ?
 
 #ENDE KONFIGURATION
 
@@ -101,7 +101,7 @@ function vhost_hinzufuegen(){									#vhost_hinzufügen ANFANG
         sleep 3
 	echo "<br>" >> $html_dir/$vhostname/$index_file;
         echo "<center><h2>Ihr vHost: <font color=green>$vhostname</font> wurde erfolgreich in $html_dir angelegt.</h2></center>" >> $html_dir/$vhostname/$index_file;
-	echo "<center><h3>http://$vhostname.$domain</center></h3>"; >> $html_dir/$vhostname/$index_file;
+	echo "<center><h3>http://$vhostname.$domain</center></h3>" >> $html_dir/$vhostname/$index_file;
 	echo "<br><br>" >> $html_dir/$vhostname/$index_file;
 	echo "<center><a href=https://github.com/Funkahdafi/RPI-vHost target=_blank>RPI-vHost@GitHub</a></center>" >> $html_dir/$vhostname/$index_file;
 	echo -e "[ \033[32mok\033[0m ] Ihr  vHost ist unter \033[32mhttp://$vhostname.$domain\033[0m erreichbar.";
@@ -145,7 +145,7 @@ then
 	echo "";
 	vhost_eintragen
 else
-	vhostname=$(echo $hostname | tr '[A-Z]' '[a-z]' | echo $hostname | tr -d " ");					#Eingabe to lower
+	vhostname=$(echo $hostname | tr '[A-Z]' '[a-z]' | tr -d " ");					#Eingabe to lower
 
 if [[ ! -e $apache_dir/sites-available/$vhostname.conf && ! -d $html_dir/$vhostname ]];		#Check: *.conf & dir
 then
