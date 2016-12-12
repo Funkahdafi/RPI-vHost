@@ -12,8 +12,8 @@
 # Autor	: Tom Baumbach									#
 # GitHub: https://github.com/Funkahdafi							#
 #											#
-# RPI-vHost.sh wurde für Rasbian 8 entwickelt und ist OpenSource.			#
-# Für andere Linux-Distributionen sind Anpassungen am Skript notwendig.			#
+# RPI-vHost.sh wurde für Rasbian 8 / Debian 8 entwickelt und ist OpenSource.		#
+# Für andere Linux-Distributionen sind eventuell Anpassungen im Skript notwendig.	#
 #											#
 # Für Schäden, die durch diese Software entstehen können, übernehme ich keine Haftung.	#
 #											#
@@ -29,7 +29,7 @@ html_dir=/var/www/html										#Apache2 DocumentRoot für Ihren vHost.
 
 index_file=index.html										#Index-Datei: .htm, .html, .php, .php5
 
-server_admin_mail=mail@example.com								#E-Mail Serveradmin
+serveradmin_mail=mail@example.com								#E-Mail Serveradmin
 
 domain=localhost										#Auf welcher Domain soll der vHost laufen ?
 
@@ -82,7 +82,7 @@ function vhost_hinzufuegen(){									#vhost_hinzufügen ANFANG
         touch $apache_dir/sites-available/$vhostname.conf;
         sleep 1
         echo "<VirtualHost  *:80>" >> $apache_dir/sites-available/$vhostname.conf;
-        echo "  ServerAdmin $server_admin_mail" >> $apache_dir/sites-available/$vhostname.conf;
+        echo "  ServerAdmin $serveradmin_mail" >> $apache_dir/sites-available/$vhostname.conf;
         echo "  DocumentRoot $html_dir/$vhostname" >> $apache_dir/sites-available/$vhostname.conf;
         echo "  ServerName $vhostname.$domain" >> $apache_dir/sites-available/$vhostname.conf;
         echo "  ErrorLog logs/$vhostname.error_log" >> $apache_dir/sites-available/$vhostname.conf;
