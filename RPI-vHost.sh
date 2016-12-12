@@ -31,7 +31,7 @@ index_file=index.html										#Index-Datei: .htm, .html, .php, .php5
 
 serveradmin_mail=mail@example.com								#E-Mail Serveradmin
 
-domain=groo.home-webserver.de										#Auf welcher Domain soll der vHost laufen ?
+domain=localhost										#Auf welcher Domain soll der vHost laufen ?
 
 #ENDE KONFIGURATION
 
@@ -145,7 +145,7 @@ then
 	echo "";
 	vhost_eintragen
 else
-	vhostname=$(echo $hostname | tr '[A-Z]' '[a-z]' | tr -d " ");					#Eingabe to lower
+	vhostname=$(echo $hostname | tr '[A-Z]' '[a-z]' | tr -d " ");				#Eingabe to lower
 
 if [[ ! -e $apache_dir/sites-available/$vhostname.conf && ! -d $html_dir/$vhostname ]];		#Check: *.conf & dir
 then
