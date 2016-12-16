@@ -41,11 +41,27 @@ then
 	echo -e "\e[41mBitte führen Sie das Script als Root aus !\e[49m";
 	echo "";
 	exit
-else
-	echo "";
-        echo "Willkommen bei RPI-vHost - Apache2 vHost Generator.";
-	echo "---------------------------------------------------";
+fi
+
+function vhost_welcome(){
         echo "";
+        echo "Willkommen bei RPI-vHost - Apache2 vHost Generator.";
+        echo "---------------------------------------------------";
+        echo "";
+	}
+
+while true
+do
+
+vhost_welcome
+
+PS3='Auswahl: '
+
+options=("vHost anlegen" "Beenden")
+select opt in "${options[@]}"
+do
+	case $opt in
+		"vHost anlegen")
 
 if [ ! -d $apache_dir ];									#Check: Apache2
 then
@@ -104,7 +120,7 @@ function vhost_hinzufuegen(){									#vhost_hinzufügen ANFANG
 	echo "<center><h3>http://$vhostname.$domain</center></h3>" >> $html_dir/$vhostname/$index_file;
 	echo "<br><br>" >> $html_dir/$vhostname/$index_file;
 	echo "<center><a href=https://github.com/Funkahdafi/RPI-vHost target=_blank>RPI-vHost@GitHub</a></center>" >> $html_dir/$vhostname/$index_file;
-	echo -e "[ \033[32mok\033[0m ] Ihr  vHost ist unter \033[32mhttp://$vhostname.$domain\033[0m erreichbar.";
+	echo -e "[ \033[32mok\033[0m ] Ihr vHost ist unter \033[32mhttp://$vhostname.$domain\033[0m erreichbar.";
 	echo "";
         echo "Vielen Dank, wir sind fertig :-))";
 	echo "";
@@ -113,17 +129,18 @@ function vhost_hinzufuegen(){									#vhost_hinzufügen ANFANG
 	read -p "Eingabe: " antwort
 	if [[ $antwort = "j" && ! -z $antwort ]];
 then
-	echo "";
+#	echo "";
 	vhost_eintragen
 else
 	if [[ $antwort = "n" && ! -z $antwort ]];
 then
         echo "";
-        echo "Auf Wiedersehen !";
+        echo "Zurück zum Hauptmenü";
         echo "";
-        sleep 2
-        clear;
-	exit
+        sleep 1
+	clear;
+	break
+
 else
   	echo "";
         echo "Ungültige Auswahl. Bitte probieren Sie es erneut.";
@@ -134,6 +151,7 @@ fi
 }												#vhost_hinzufügen ENDE
 
 function vhost_eintragen(){									#vhost_eintragen ANFANG
+	echo "";
 	echo "Bitte geben Sie einen Hostnamen an.";
 	read -p "Eingabe: " hostname
 
@@ -167,11 +185,12 @@ else
 	if [[ $antwort = "n" && ! -z $antwort ]];
 then
 	echo "";
-	echo "Auf Wiedersehen !";
+	echo "Zurück zum Hauptmenü";
 	echo "";
-	sleep 2
+	sleep 1
 	clear;
-	exit
+	break
+
 else
 	echo "";
 	echo "Ungültige Auswahl. Bitte probieren Sie es erneut.";
@@ -188,4 +207,19 @@ fi
 
 fi
 fi
-fi
+
+		break
+		;;
+		"Beenden")
+		echo "";
+		echo "RPI-vHost wird beendet. Auf Wiedersehen !";
+		sleep 1
+		exit
+		;;
+		*)
+		echo "";
+		echo "Ungültige Option.";
+		;;
+	esac
+done
+done
