@@ -44,16 +44,18 @@ then
 fi
 
 function vhost_welcome(){
-        echo "";
-        echo "Willkommen bei RPI-vHost - Apache2 vHost Generator.";
-        echo "---------------------------------------------------";
+	echo "";
+        echo "	+---------------------------------------------------------------+";
+        echo "	|	Willkommen bei RPI-vHost - Apache2 vHost Generator.	|";
+	echo "	|		https://github.com/Funkahdafi			|";
+        echo "	+---------------------------------------------------------------+";
         echo "";
 	}
 
 while true
 do
 
-vhost_welcome
+	vhost_welcome
 
 PS3='Auswahl: '
 
@@ -129,7 +131,6 @@ function vhost_hinzufuegen(){									#vhost_hinzufügen ANFANG
 	read -p "Eingabe: " antwort
 	if [[ $antwort = "j" && ! -z $antwort ]];
 then
-#	echo "";
 	vhost_eintragen
 else
 	if [[ $antwort = "n" && ! -z $antwort ]];
@@ -140,7 +141,6 @@ then
         sleep 1
 	clear;
 	break
-
 else
   	echo "";
         echo "Ungültige Auswahl. Bitte probieren Sie es erneut.";
@@ -190,7 +190,6 @@ then
 	sleep 1
 	clear;
 	break
-
 else
 	echo "";
 	echo "Ungültige Auswahl. Bitte probieren Sie es erneut.";
@@ -207,7 +206,6 @@ fi
 
 fi
 fi
-
 		break
 		;;
 		"Beenden")
@@ -218,7 +216,11 @@ fi
 		;;
 		*)
 		echo "";
-		echo "Ungültige Option.";
+		echo "Ungültige Auswahl. Bitte probieren Sie es erneut.";
+		echo "";
+		sleep 1
+		clear;
+		break
 		;;
 	esac
 done
