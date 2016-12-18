@@ -1,12 +1,18 @@
 #RPI-vHost
 
-Danke für's reinschauen.
-
-Mit RPI-vHost kann man bequem virtuelle Hosts einem Apache2 Webserver hinzufügen.<br>
+Mit RPI-vHost kann man bequem virtuelle Hosts eines Apache2 Webserver verwalten.<br>
 Vor dem ersten Start empfiehlt es sich die Optionen in dem Script zu editieren.
 
+<h4>Funktionen</h4>
+
+<ul>
+<li>vHost anlegen<y/li>
+<li>vHost löschen</li>
+<li>vHost-Liste</li>
+</ul>
+
 <h4>Konfiguration von RPI-vHost</h4>
-<code>nano RPI-vHost</code>
+<code>nano RPI-vHost.sh</code>
 
 <h4>Programm als Root ausführbar machen und starten.</h4>
 <code>su -i</code><br>
