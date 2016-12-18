@@ -58,8 +58,7 @@ do
 	vhost_welcome
 
 PS3='Auswahl: '
-
-options=("vHost anlegen" "Beenden")
+options=("vHost anlegen" "vHost löschen" "vHost-Liste" "Beenden")
 select opt in "${options[@]}"
 do
 	case $opt in
@@ -185,7 +184,7 @@ else
 	if [[ $antwort = "n" && ! -z $antwort ]];
 then
 	echo "";
-	echo "Zurück zum Hauptmenü";
+	echo "Zurück zum Hauptmenü.";
 	echo "";
 	sleep 1
 	clear;
@@ -206,22 +205,105 @@ fi
 
 fi
 fi
-		break
-		;;
-		"Beenden")
-		echo "";
-		echo "RPI-vHost wird beendet. Auf Wiedersehen !";
-		sleep 1
-		exit
-		;;
-		*)
-		echo "";
-		echo "Ungültige Auswahl. Bitte probieren Sie es erneut.";
-		echo "";
-		sleep 1
-		clear;
-		break
-		;;
+	break
+	;;
+	"vHost löschen")
+function vhost_loeschen(){
+	echo "";
+	echo "Welchen vHost wollen Sie löschen ?";
+	echo "";
+	sleep 0.3
+ 	ls -1 $apache_dir/sites-available | grep conf | cut -d. -f1
+	echo "";
+	read -p "Hostname: " antwort_vhost_name
+	vhost_name=$(echo $antwort_vhost_name | tr '[A-Z]' '[a-z]' | tr -d " ");
+	echo "";
+
+if [[ -z $vhost_name || (! -f $apache_dir/sites-available/$vhost_name.conf && ! -f $apache_dir/sites-enabled/$vhost_name.conf) ]];
+then
+       	echo "";
+       	echo "Sie haben keinen bzw. einen ungültigen Hostnamen eingegeben.";
+       	echo "Bitte versuchen Sie es erneut.";
+       	echo "";
+	vhost_loeschen
+else
+
+if [[ -f $apache_dir/sites-available/$vhost_name.conf && -f $apache_dir/sites-enabled/$vhost_name.conf ]];
+then
+
+	if [[ $vhost_name = "000-default" || $vhost_name = "000-default-le-ssl" || $vhost_name = "default-ssl" ]];
+	then
+	echo "Standard-vHost $vhost_name löschen ist nicht erlaubt!";
+	echo "";
+	vhost_loeschen
+else
+	echo "vHost $vhost_name wird gelöscht.";
+	echo "Dieser Vorgang kann einige Sekunden in Anspruch nehmen.";
+	echo "";
+	sleep 1
+	a2dissite $vhost_name > /dev/null;
+	rm $apache_dir/sites-available/$vhost_name.conf
+	echo -e "[ \033[32mok\033[0m ] $vhost_name wurde gelöscht.";
+	sleep 1
+	/etc/init.d/apache2 reload > /dev/null;
+	echo -e "[ \033[32mok\033[0m ] Apache2 wurde neugestartet.";
+	echo "";
+	echo "Weiteren vHost löschen ? j/n"
+	read -p "Eingabe: " antwort
+if [[ $antwort = "j" && ! -z $antwort ]];
+then
+	vhost_loeschen
+else
+
+if [[ $antwort = "n" && ! -z $antwort ]];
+then
+	echo "";
+        echo "Zurück zum Hauptmenü.";
+        echo "";
+        sleep 1
+        clear;
+        break
+else
+        echo "Ungültige Auswahl. Bitte probieren Sie es erneut.";
+        echo "";
+        vhost_loeschen
+fi
+fi
+fi
+fi
+fi
+}
+	vhost_loeschen
+	;;
+	"vHost-Liste")
+        echo "";
+        echo "Liste der virtuellen Hosts auf diesem System:";
+        echo "";
+        ls -1 $apache_dir/sites-available | grep conf | cut -d. -f1
+        echo "";
+
+function pause(){
+	read -p "$*"
+}
+
+	pause '[Enter] drücken für Hauptmenü...'
+	clear;
+        break
+        ;;
+	"Beenden")
+	echo "";
+	echo "RPI-vHost wird beendet. Auf Wiedersehen !";
+	sleep 1
+	exit
+	;;
+	*)
+	echo "";
+	echo "Ungültige Auswahl. Bitte probieren Sie es erneut.";
+	echo "";
+	sleep 1
+	clear;
+	break
+	;;
 	esac
 done
 done
