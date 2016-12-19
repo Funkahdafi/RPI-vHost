@@ -64,9 +64,9 @@ do
 	case $opt in
 		"vHost anlegen")
 
-if [ ! -d $apache_dir ];									#Check: Apache2
+if ! dpkg-query -s apache2 2>/dev/null|grep -q installed;						#Check: Apache2
 then
-	echo -e "\e[41m$apache_dir ist nicht vorhanden!\e[49m";
+	echo -e "\e[41mApache2 ist nicht installiert!\e[49m";
 	echo "Das Programm wird beendet! Bitte installieren Sie Apache2.";
 	echo "";
 	exit
